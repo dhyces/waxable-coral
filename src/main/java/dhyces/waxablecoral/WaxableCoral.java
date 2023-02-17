@@ -153,6 +153,7 @@ public class WaxableCoral {
     private void datagen(final GatherDataEvent event) {
         event.getGenerator().addProvider(event.includeClient(), new ModBlockStateProvider(event.getGenerator(), MODID, event.getExistingFileHelper()));
         event.getGenerator().addProvider(event.includeClient(), new ModLangProvider(event.getGenerator(), MODID, "en_us"));
+        event.getGenerator().addProvider(event.includeClient(), new ModBlockLootTableProvider(event.getGenerator()));
     }
 
     private void onBlockRightClick(final PlayerInteractEvent.RightClickBlock event) {
