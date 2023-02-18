@@ -47,6 +47,8 @@ public class WaxableCoral {
     public static final TagKey<Block> WAXED_CORALS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_corals"));
     public static final TagKey<Block> WAXED_WALL_CORALS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_wall_corals"));
 
+    public static final TagKey<Item> HONEYCOMBS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", "honeycombs"));
+
     private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registry.BLOCK_REGISTRY, MODID);
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registry.ITEM_REGISTRY, MODID);
 
@@ -161,7 +163,7 @@ public class WaxableCoral {
         BlockState state = event.getLevel().getBlockState(waxingPos);
         ItemStack usedStack = event.getItemStack();
         Level level = event.getLevel();
-        if ((state.is(BlockTags.CORALS) || state.is(BlockTags.CORAL_BLOCKS) || state.is(BlockTags.WALL_CORALS)) && usedStack.is(Items.HONEYCOMB)) {
+        if ((state.is(BlockTags.CORALS) || state.is(BlockTags.CORAL_BLOCKS) || state.is(BlockTags.WALL_CORALS)) && (usedStack.is(HONEYCOMBS) || usedStack.is(Items.HONEYCOMB))) {
             Block waxed = WAXING_BIMAP.get(state.getBlock());
             if (waxed != null) {
                 BlockState waxedState = waxed.withPropertiesOf(state);
