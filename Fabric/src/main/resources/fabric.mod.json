@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "waxablecoral",
+  "version": "${version}",
+
+  "name": "Waxable Coral",
+  "description": "Wax your coral! Stays alive even when it's dry!",
+  "authors": [
+    "Dhyces"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/waxable-coral",
+    "sources": "https://github.com/dhyces/waxable-coral",
+    "issues": "https://github.com/dhyces/waxable-coral/issues"
+  },
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dhyces.waxablecoral.FabricWaxableCoral"
+    ],
+    "client": [
+      "dhyces.waxablecoral.FabricWaxableCoralClient"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.14",
+    "fabric": "*",
+    "minecraft": "1.19.2",
+    "java": ">=17"
+  }
+}
