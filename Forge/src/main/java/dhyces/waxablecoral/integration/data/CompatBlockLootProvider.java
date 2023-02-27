@@ -1,8 +1,9 @@
-package dhyces.waxablecoral;
+package dhyces.waxablecoral.integration.data;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
+import dhyces.waxablecoral.integration.ua.UpgradeAquaticCompat;
 import dhyces.waxablecoral.registryutil.CommonRegistryObject;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.LootTableProvider;
@@ -29,14 +30,14 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class ModBlockLootTableProvider extends LootTableProvider {
-    public ModBlockLootTableProvider(DataGenerator pGenerator) {
+public class CompatBlockLootProvider extends LootTableProvider {
+    public CompatBlockLootProvider(DataGenerator pGenerator) {
         super(pGenerator);
     }
 
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return List.of(Pair.of(ModBlockLoot::new, LootContextParamSets.BLOCK));
+        return List.of(Pair.of(CompatBlockLoot::new, LootContextParamSets.BLOCK));
     }
 
     @Override
@@ -44,35 +45,61 @@ public class ModBlockLootTableProvider extends LootTableProvider {
         // NO-OP
     }
 
-    static class ModBlockLoot implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
+    static class CompatBlockLoot implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
 
         private static final Set<Item> EXPLOSION_RESISTANT = Stream.of(Blocks.DRAGON_EGG, Blocks.BEACON, Blocks.CONDUIT, Blocks.SKELETON_SKULL, Blocks.WITHER_SKELETON_SKULL, Blocks.PLAYER_HEAD, Blocks.ZOMBIE_HEAD, Blocks.CREEPER_HEAD, Blocks.DRAGON_HEAD, Blocks.SHULKER_BOX, Blocks.BLACK_SHULKER_BOX, Blocks.BLUE_SHULKER_BOX, Blocks.BROWN_SHULKER_BOX, Blocks.CYAN_SHULKER_BOX, Blocks.GRAY_SHULKER_BOX, Blocks.GREEN_SHULKER_BOX, Blocks.LIGHT_BLUE_SHULKER_BOX, Blocks.LIGHT_GRAY_SHULKER_BOX, Blocks.LIME_SHULKER_BOX, Blocks.MAGENTA_SHULKER_BOX, Blocks.ORANGE_SHULKER_BOX, Blocks.PINK_SHULKER_BOX, Blocks.PURPLE_SHULKER_BOX, Blocks.RED_SHULKER_BOX, Blocks.WHITE_SHULKER_BOX, Blocks.YELLOW_SHULKER_BOX).map(ItemLike::asItem).collect(ImmutableSet.toImmutableSet());
         private final Map<ResourceLocation, LootTable.Builder> map = Maps.newHashMap();
 
         protected void addTables() {
-            dropSelf(Register.WAXED_TUBE_CORAL_BLOCK.get());
-            dropSelf(Register.WAXED_BRAIN_CORAL_BLOCK.get());
-            dropSelf(Register.WAXED_BUBBLE_CORAL_BLOCK.get());
-            dropSelf(Register.WAXED_FIRE_CORAL_BLOCK.get());
-            dropSelf(Register.WAXED_HORN_CORAL_BLOCK.get());
+            dropSelf(UpgradeAquaticCompat.WAXED_ACAN_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_FINGER_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_STAR_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_MOSS_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_PETAL_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_BRANCH_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_ROCK_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_PILLOW_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_SILK_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_CHROME_CORAL_BLOCK);
+            dropSelf(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_BLOCK);
 
-            dropSelf(Register.WAXED_TUBE_CORAL.get());
-            dropSelf(Register.WAXED_BRAIN_CORAL.get());
-            dropSelf(Register.WAXED_BUBBLE_CORAL.get());
-            dropSelf(Register.WAXED_FIRE_CORAL.get());
-            dropSelf(Register.WAXED_HORN_CORAL.get());
+            dropSelf(UpgradeAquaticCompat.WAXED_ACAN_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_FINGER_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_STAR_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_MOSS_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_PETAL_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_BRANCH_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_ROCK_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_PILLOW_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_SILK_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_CHROME_CORAL);
+            dropSelf(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL);
 
-            dropSelf(Register.WAXED_TUBE_CORAL_FAN.get());
-            dropSelf(Register.WAXED_BRAIN_CORAL_FAN.get());
-            dropSelf(Register.WAXED_BUBBLE_CORAL_FAN.get());
-            dropSelf(Register.WAXED_FIRE_CORAL_FAN.get());
-            dropSelf(Register.WAXED_HORN_CORAL_FAN.get());
+            dropSelf(UpgradeAquaticCompat.WAXED_ACAN_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_FINGER_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_STAR_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_MOSS_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_PETAL_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_BRANCH_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_ROCK_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_PILLOW_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_SILK_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_CHROME_CORAL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_FAN);
 
-            dropSelf(Register.WAXED_TUBE_CORAL_WALL_FAN.get());
-            dropSelf(Register.WAXED_BRAIN_CORAL_WALL_FAN.get());
-            dropSelf(Register.WAXED_BUBBLE_CORAL_WALL_FAN.get());
-            dropSelf(Register.WAXED_FIRE_CORAL_WALL_FAN.get());
-            dropSelf(Register.WAXED_HORN_CORAL_WALL_FAN.get());
+            dropSelf(UpgradeAquaticCompat.WAXED_ACAN_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_FINGER_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_STAR_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_MOSS_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_PETAL_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_BRANCH_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_ROCK_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_PILLOW_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_SILK_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_CHROME_CORAL_WALL_FAN);
+            dropSelf(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_WALL_FAN);
+
+            dropSelf(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_SHOWER);
         }
 
         protected static <T extends ConditionUserBuilder<T>> T applyExplosionCondition(ItemLike pItem, ConditionUserBuilder<T> pCondition) {
