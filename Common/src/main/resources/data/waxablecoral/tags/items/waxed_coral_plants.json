@@ -4,6 +4,50 @@
     "waxablecoral:waxed_brain_coral",
     "waxablecoral:waxed_bubble_coral",
     "waxablecoral:waxed_fire_coral",
-    "waxablecoral:waxed_horn_coral"
+    "waxablecoral:waxed_horn_coral",
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_acan_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_finger_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_star_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_moss_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_petal_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_branch_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_rock_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_pillow_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_silk_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_chrome_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral"
+    }
   ]
 }
