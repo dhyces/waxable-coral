@@ -1,6 +1,7 @@
 plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 archivesBaseName = "${mod_id}-Forge-${mc_version}-${mod_version}"
@@ -19,6 +20,9 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 waxablecoral {
@@ -58,17 +62,51 @@ minecraft {
                 }
             }
         }
+
+        compatdata {
+            parent data
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            main "cpw.mods.bootstraplauncher.BootstrapLauncher"
+            source sourceSets.main
+            taskName "runCompatData"
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'waxablecoral', '--all', '--output', file("src/generated/resources/"), '--existing', file("src/main/resources/")
+
+            mods {
+                waxablecoral {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
     }
 }
 
+sourceSets.main.resources { srcDir "src/generated/resources" }
+
 repositories {
     mavenCentral()
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
+    implementation fg.deobf("curse.maven:blueprint-382216:3991478")
+    implementation fg.deobf("curse.maven:upgradeaquatic-326895:4365140")
+
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly project(":Common")
 }
 
