@@ -75,8 +75,4 @@ public class Register {
     private static <T extends Block, E extends Block> RegistryObject<StandingAndWallBlockItem> registerStandingWallBlockItem(RegistryObject<T> standingBlock, RegistryObject<E> wallBlock) {
         return registerItem(standingBlock.getId().getPath(), () -> new StandingAndWallBlockItem(standingBlock.get(), wallBlock.get(), new Item.Properties(), Direction.DOWN));
     }
-
-    static <T> T cast(Object o) {
-        return (T) o;
-    }
 }
