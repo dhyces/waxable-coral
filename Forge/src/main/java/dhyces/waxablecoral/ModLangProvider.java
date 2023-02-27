@@ -1,14 +1,14 @@
 package dhyces.waxablecoral;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import static dhyces.waxablecoral.Register.*;
 
 public class ModLangProvider extends LanguageProvider {
 
-    public ModLangProvider(DataGenerator gen, String modid, String locale) {
-        super(gen, modid, locale);
+    public ModLangProvider(PackOutput output, String modid, String locale) {
+        super(output, modid, locale);
     }
 
     @Override

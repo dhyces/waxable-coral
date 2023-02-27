@@ -3,9 +3,13 @@ package dhyces.waxablecoral;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -27,8 +31,10 @@ import net.minecraftforge.registries.DeferredRegister;
 @Mod(WaxableCoral.MODID)
 public class ForgeWaxableCoral {
 
-    public static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registry.BLOCK_REGISTRY, WaxableCoral.MODID);
-    public static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registry.ITEM_REGISTRY, WaxableCoral.MODID);
+    public static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, WaxableCoral.MODID);
+    public static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registries.ITEM, WaxableCoral.MODID);
+
+    public static final TagKey<Item> HONEYCOMBS = TagKey.create(Registries.ITEM, new ResourceLocation("forge", "honeycombs"));
 
     public ForgeWaxableCoral() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -55,9 +61,10 @@ public class ForgeWaxableCoral {
     }
 
     private void datagen(final GatherDataEvent event) {
-        event.getGenerator().addProvider(event.includeClient(), new ModBlockStateProvider(event.getGenerator(), WaxableCoral.MODID, event.getExistingFileHelper()));
-        event.getGenerator().addProvider(event.includeClient(), new ModLangProvider(event.getGenerator(), WaxableCoral.MODID, "en_us"));
-        event.getGenerator().addProvider(event.includeClient(), new ModBlockLootTableProvider(event.getGenerator()));
+        PackOutput output = event.getGenerator().getPackOutput();
+        event.getGenerator().addProvider(event.includeClient(), new ModBlockStateProvider(output, WaxableCoral.MODID, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(event.includeClient(), new ModLangProvider(output, WaxableCoral.MODID, "en_us"));
+        event.getGenerator().addProvider(event.includeClient(), new ModBlockLootTableProvider(output));
     }
 
     private void onBlockRightClick(final PlayerInteractEvent.RightClickBlock event) {
@@ -65,7 +72,7 @@ public class ForgeWaxableCoral {
         BlockState state = event.getLevel().getBlockState(waxingPos);
         ItemStack usedStack = event.getItemStack();
         Level level = event.getLevel();
-        if ((state.is(BlockTags.CORALS) || state.is(BlockTags.CORAL_BLOCKS) || state.is(BlockTags.WALL_CORALS)) && (usedStack.is(WaxableCoral.HONEYCOMBS) || usedStack.is(Items.HONEYCOMB))) {
+        if (usedStack.is(HONEYCOMBS) || usedStack.is(Items.HONEYCOMB)) {
             Block waxed = WaxableCoralAPI.getWaxed(state.getBlock());
             if (waxed != null) {
                 BlockState waxedState = waxed.withPropertiesOf(state);
@@ -89,12 +96,10 @@ public class ForgeWaxableCoral {
     private void onAxeWaxOffUsed(final BlockEvent.BlockToolModificationEvent event) {
         if (event.getToolAction().equals(ToolActions.AXE_WAX_OFF)) {
             BlockState state = event.getLevel().getBlockState(event.getContext().getClickedPos());
-            if (state.is(WaxableCoral.WAXED_CORALS) || state.is(WaxableCoral.WAXED_CORAL_BLOCKS) || state.is(WaxableCoral.WAXED_WALL_CORALS)) {
-                Block unwaxed = WaxableCoralAPI.getUnwaxed(state.getBlock());
-                if (unwaxed != null) {
-                    event.setFinalState(unwaxed.withPropertiesOf(state));
-                    event.getLevel().scheduleTick(event.getPos(), unwaxed, 60 + event.getLevel().getRandom().nextInt(40));
-                }
+            Block unwaxed = WaxableCoralAPI.getUnwaxed(state.getBlock());
+            if (unwaxed != null) {
+                event.setFinalState(unwaxed.withPropertiesOf(state));
+                event.getLevel().scheduleTick(event.getPos(), unwaxed, 60 + event.getLevel().getRandom().nextInt(40));
             }
         }
     }

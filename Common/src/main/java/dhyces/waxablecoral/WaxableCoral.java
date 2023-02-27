@@ -1,9 +1,8 @@
 package dhyces.waxablecoral;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,10 +18,8 @@ public class WaxableCoral {
         Register.init();
     }
 
-    public static final TagKey<Block> WAXED_CORAL_BLOCKS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_coral_blocks"));
-    public static final TagKey<Block> WAXED_CORAL_PLANTS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_coral_plants"));
-    public static final TagKey<Block> WAXED_CORALS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_corals"));
-    public static final TagKey<Block> WAXED_WALL_CORALS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_wall_corals"));
-
-    public static final TagKey<Item> HONEYCOMBS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", "honeycombs"));
+    public static final TagKey<Block> WAXED_CORAL_BLOCKS = TagKey.create(Registries.BLOCK, id("waxed_coral_blocks"));
+    public static final TagKey<Block> WAXED_CORAL_PLANTS = TagKey.create(Registries.BLOCK, id("waxed_coral_plants"));
+    public static final TagKey<Block> WAXED_CORALS = TagKey.create(Registries.BLOCK, id("waxed_corals"));
+    public static final TagKey<Block> WAXED_WALL_CORALS = TagKey.create(Registries.BLOCK, id("waxed_wall_corals"));
 }

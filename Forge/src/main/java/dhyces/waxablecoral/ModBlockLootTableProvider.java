@@ -3,9 +3,9 @@ package dhyces.waxablecoral;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -30,13 +30,9 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ModBlockLootTableProvider extends LootTableProvider {
-    public ModBlockLootTableProvider(DataGenerator pGenerator) {
-        super(pGenerator);
-    }
 
-    @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return List.of(Pair.of(ModBlockLoot::new, LootContextParamSets.BLOCK));
+    public ModBlockLootTableProvider(PackOutput pOutput) {
+        super(pOutput, Set.of(), List.of(new SubProviderEntry(ModBlockLoot::new, LootContextParamSets.BLOCK)));
     }
 
     @Override
@@ -44,7 +40,7 @@ public class ModBlockLootTableProvider extends LootTableProvider {
         // NO-OP
     }
 
-    static class ModBlockLoot implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
+    static class ModBlockLoot implements LootTableSubProvider {
 
         private static final Set<Item> EXPLOSION_RESISTANT = Stream.of(Blocks.DRAGON_EGG, Blocks.BEACON, Blocks.CONDUIT, Blocks.SKELETON_SKULL, Blocks.WITHER_SKELETON_SKULL, Blocks.PLAYER_HEAD, Blocks.ZOMBIE_HEAD, Blocks.CREEPER_HEAD, Blocks.DRAGON_HEAD, Blocks.SHULKER_BOX, Blocks.BLACK_SHULKER_BOX, Blocks.BLUE_SHULKER_BOX, Blocks.BROWN_SHULKER_BOX, Blocks.CYAN_SHULKER_BOX, Blocks.GRAY_SHULKER_BOX, Blocks.GREEN_SHULKER_BOX, Blocks.LIGHT_BLUE_SHULKER_BOX, Blocks.LIGHT_GRAY_SHULKER_BOX, Blocks.LIME_SHULKER_BOX, Blocks.MAGENTA_SHULKER_BOX, Blocks.ORANGE_SHULKER_BOX, Blocks.PINK_SHULKER_BOX, Blocks.PURPLE_SHULKER_BOX, Blocks.RED_SHULKER_BOX, Blocks.WHITE_SHULKER_BOX, Blocks.YELLOW_SHULKER_BOX).map(ItemLike::asItem).collect(ImmutableSet.toImmutableSet());
         private final Map<ResourceLocation, LootTable.Builder> map = Maps.newHashMap();
@@ -96,7 +92,7 @@ public class ModBlockLootTableProvider extends LootTableProvider {
         }
 
         @Override
-        public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
+        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
             this.addTables();
 
             for (Map.Entry<ResourceLocation, LootTable.Builder> entry : map.entrySet()) {

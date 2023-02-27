@@ -1,3 +1,17 @@
+plugins {
+    id 'com.matyrobbrt.mc.registrationutils' version "${reg_utils}"
+}
+
+registrationUtils {
+    group 'dhyces.waxablecoral.registration'
+    projects {
+        // A project is declared like so: name { configuration }
+        Fabric { type 'fabric'; project ":Fabric" } // The fabric project
+        Forge { type 'forge'; project ":Forge" } // The forge project
+        Common { type 'common'; project ":Common" } // The common project
+    }
+}
+
 subprojects {
     apply plugin: 'java'
 

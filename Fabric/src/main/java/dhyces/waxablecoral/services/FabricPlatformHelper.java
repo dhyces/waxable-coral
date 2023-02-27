@@ -5,6 +5,7 @@ import dhyces.waxablecoral.WaxableCoral;
 import dhyces.waxablecoral.registryutil.CommonRegistryObject;
 import dhyces.waxablecoral.services.helpers.PlatformHelper;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.HoneycombItem;
@@ -22,7 +23,7 @@ public class FabricPlatformHelper implements PlatformHelper {
         ResourceLocation rl = WaxableCoral.id(id);
         ResourceKey<T> key = ResourceKey.create(registryKey, rl);
         T obj = objectSupplier.get();
-        Registry<?> registry = Registry.REGISTRY.get(registryKey.location());
+        Registry<?> registry = BuiltInRegistries.REGISTRY.get(registryKey.location());
         Registry.register(cast(registry), key, obj);
         return CommonRegistryObject.of(key, () -> obj);
     }
