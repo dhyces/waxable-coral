@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral_fan"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral_wall_fan"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral_shower"
+    }
+  ]
+}
