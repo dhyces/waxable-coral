@@ -1,13 +1,7 @@
 package dhyces.waxablecoral.services;
 
 import com.google.common.collect.BiMap;
-import dhyces.waxablecoral.WaxableCoral;
-import dhyces.waxablecoral.registryutil.CommonRegistryObject;
 import dhyces.waxablecoral.services.helpers.PlatformHelper;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.level.block.BaseCoralFanBlock;
 import net.minecraft.world.level.block.BaseCoralPlantBlock;
@@ -15,18 +9,7 @@ import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import java.util.function.Supplier;
-
 public class FabricPlatformHelper implements PlatformHelper {
-    @Override
-    public <T> CommonRegistryObject<T> register(String id, ResourceKey<? extends Registry<T>> registryKey, Supplier<T> objectSupplier) {
-        ResourceLocation rl = WaxableCoral.id(id);
-        ResourceKey<T> key = ResourceKey.create(registryKey, rl);
-        T obj = objectSupplier.get();
-        Registry<?> registry = BuiltInRegistries.REGISTRY.get(registryKey.location());
-        Registry.register(cast(registry), key, obj);
-        return CommonRegistryObject.of(key, () -> obj);
-    }
 
     @Override
     public BaseCoralPlantBlock createCoralPlantBlock(BlockBehaviour.Properties properties) {

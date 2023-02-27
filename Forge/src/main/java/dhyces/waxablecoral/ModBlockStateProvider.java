@@ -1,15 +1,12 @@
 package dhyces.waxablecoral;
 
-import dhyces.waxablecoral.registryutil.CommonRegistryObject;
-import net.minecraft.data.DataGenerator;
+import dhyces.waxablecoral.registration.RegistryObject;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -44,13 +41,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         unwaxedVanillaWallFan(Register.WAXED_HORN_CORAL_WALL_FAN);
     }
 
-    private <T extends Block> void unwaxedVanilla(CommonRegistryObject<T> block) {
+    private <T extends Block> void unwaxedVanilla(RegistryObject<T> block) {
         ResourceLocation unwaxed = mcLoc(block.getId().getPath().substring(block.getId().getPath().indexOf('_')+1));
         simpleBlock(block.get(), getExistingModel(block(unwaxed)));
         itemModels().withExistingParent(block.getId().getPath(), unwaxed);
     }
 
-    private <T extends Block> void unwaxedVanillaWallFan(CommonRegistryObject<T> block) {
+    private <T extends Block> void unwaxedVanillaWallFan(RegistryObject<T> block) {
         ResourceLocation unwaxed = mcLoc(block.getId().getPath().substring(block.getId().getPath().indexOf('_')+1));
         horizontalBlock(block.get(), getExistingModel(block(unwaxed)));
     }
