@@ -2,7 +2,6 @@ package dhyces.waxablecoral.services.helpers;
 
 import com.google.common.collect.BiMap;
 import dhyces.waxablecoral.registryutil.CommonRegistryObject;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.BaseCoralFanBlock;

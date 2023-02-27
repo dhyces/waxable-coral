@@ -1,10 +1,9 @@
 package dhyces.waxablecoral;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import dhyces.waxablecoral.integration.Compats;
-import dhyces.waxablecoral.integration.ua.UpgradeAquaticCompat;
 import dhyces.waxablecoral.integration.data.CompatBlockLootProvider;
 import dhyces.waxablecoral.integration.data.CompatBlockStateProvider;
+import dhyces.waxablecoral.integration.ua.UpgradeAquaticCompat;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -13,9 +12,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,7 +29,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DeferredRegister;
 
 @Mod(WaxableCoral.MODID)
 public class ForgeWaxableCoral {

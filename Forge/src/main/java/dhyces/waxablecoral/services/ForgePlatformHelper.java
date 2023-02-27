@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.BaseCoralPlantBlock;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
