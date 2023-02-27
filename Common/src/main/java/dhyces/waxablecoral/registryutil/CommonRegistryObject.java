@@ -13,6 +13,8 @@ public interface CommonRegistryObject<T> extends Supplier<T> {
 
     ResourceLocation getId();
 
+    boolean isPresent();
+
     class Impl<T> implements CommonRegistryObject<T> {
         private final Supplier<T> supplier;
         private transient T stored;
@@ -37,6 +39,11 @@ public interface CommonRegistryObject<T> extends Supplier<T> {
         @Override
         public ResourceLocation getId() {
             return key.location();
+        }
+
+        @Override
+        public boolean isPresent() {
+            return key != null;
         }
     }
 }

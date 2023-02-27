@@ -1,11 +1,20 @@
 package dhyces.waxablecoral;
 
 import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import dhyces.waxablecoral.services.Services;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 public class WaxableCoralAPI {
+    public static void addBehaviors(Consumer<BiMap<Block, Block>> consumer) {
+        consumer.accept(Services.PLATFORM_HELPER.getWaxMap());
+    }
 
     public static Block getWaxed(Block unwaxedBlock) {
         return Services.PLATFORM_HELPER.getWaxMap().get(unwaxedBlock);

@@ -23,6 +23,4 @@ public class WaxableCoral {
     public static final TagKey<Block> WAXED_CORAL_PLANTS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_coral_plants"));
     public static final TagKey<Block> WAXED_CORALS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_corals"));
     public static final TagKey<Block> WAXED_WALL_CORALS = TagKey.create(Registry.BLOCK_REGISTRY, id("waxed_wall_corals"));
-
-    public static final TagKey<Item> HONEYCOMBS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", "honeycombs"));
 }
