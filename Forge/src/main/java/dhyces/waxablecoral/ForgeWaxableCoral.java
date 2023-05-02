@@ -1,14 +1,15 @@
 package dhyces.waxablecoral;
 
+import dhyces.waxablecoral.data.ModBlockLootTableProvider;
+import dhyces.waxablecoral.data.ModBlockStateProvider;
+import dhyces.waxablecoral.data.ModLangProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.*;

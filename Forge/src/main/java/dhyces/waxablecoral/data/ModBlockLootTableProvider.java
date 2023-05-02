@@ -1,8 +1,9 @@
-package dhyces.waxablecoral;
+package dhyces.waxablecoral.data;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
+import dhyces.waxablecoral.Register;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;

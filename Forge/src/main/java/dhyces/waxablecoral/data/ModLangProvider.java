@@ -1,4 +1,4 @@
-package dhyces.waxablecoral;
+package dhyces.waxablecoral.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;

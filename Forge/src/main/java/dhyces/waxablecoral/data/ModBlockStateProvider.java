@@ -1,5 +1,6 @@
-package dhyces.waxablecoral;
+package dhyces.waxablecoral.data;
 
+import dhyces.waxablecoral.Register;
 import dhyces.waxablecoral.registration.RegistryObject;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

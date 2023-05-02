@@ -16,7 +16,7 @@ public class Register {
     public static void init() {}
     
     private static final RegistrationProvider<Block> BLOCK = RegistrationProvider.get(Registries.BLOCK, WaxableCoral.MODID);
-    private static final RegistrationProvider<Item> ITEM = RegistrationProvider.get(Registries.ITEM, WaxableCoral.MODID);
+    public static final RegistrationProvider<Item> ITEM = RegistrationProvider.get(Registries.ITEM, WaxableCoral.MODID);
 
     public static final RegistryObject<Block> WAXED_TUBE_CORAL_BLOCK = registerBlock("waxed_tube_coral_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, DyeColor.BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.CORAL_BLOCK)));
     public static final RegistryObject<Block> WAXED_BRAIN_CORAL_BLOCK = registerBlock("waxed_brain_coral_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, DyeColor.PINK).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.CORAL_BLOCK)));
