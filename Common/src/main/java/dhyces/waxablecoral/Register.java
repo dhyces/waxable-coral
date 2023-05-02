@@ -8,6 +8,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 import java.util.function.Supplier;
 
@@ -50,22 +51,82 @@ public class Register {
     public static final CommonRegistryObject<BlockItem> WAXED_FIRE_CORAL_ITEM = registerBlockItem(WAXED_FIRE_CORAL);
     public static final CommonRegistryObject<BlockItem> WAXED_HORN_CORAL_ITEM = registerBlockItem(WAXED_HORN_CORAL);
     
-    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_TUBE_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_TUBE_CORAL_FAN, WAXED_TUBE_CORAL_WALL_FAN);
-    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_BRAIN_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_BRAIN_CORAL_FAN, WAXED_BRAIN_CORAL_WALL_FAN);
-    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_BUBBLE_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_BUBBLE_CORAL_FAN, WAXED_BUBBLE_CORAL_WALL_FAN);
-    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_FIRE_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_FIRE_CORAL_FAN, WAXED_FIRE_CORAL_WALL_FAN);
-    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_HORN_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_HORN_CORAL_FAN, WAXED_HORN_CORAL_WALL_FAN);
+    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_TUBE_CORAL_FAN_ITEM = registerFanItem(WAXED_TUBE_CORAL_FAN, WAXED_TUBE_CORAL_WALL_FAN);
+    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_BRAIN_CORAL_FAN_ITEM = registerFanItem(WAXED_BRAIN_CORAL_FAN, WAXED_BRAIN_CORAL_WALL_FAN);
+    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_BUBBLE_CORAL_FAN_ITEM = registerFanItem(WAXED_BUBBLE_CORAL_FAN, WAXED_BUBBLE_CORAL_WALL_FAN);
+    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_FIRE_CORAL_FAN_ITEM = registerFanItem(WAXED_FIRE_CORAL_FAN, WAXED_FIRE_CORAL_WALL_FAN);
+    public static final CommonRegistryObject<StandingAndWallBlockItem> WAXED_HORN_CORAL_FAN_ITEM = registerFanItem(WAXED_HORN_CORAL_FAN, WAXED_HORN_CORAL_WALL_FAN);
 
-    private static <T, E extends T> CommonRegistryObject<E> register(String id, ResourceKey<? extends Registry<T>> registryKey, Supplier<E> objectSupplier) {
+    protected static CommonRegistryObject<Block> registerVanillaCoralBlock(String id, DyeColor color) {
+        return registerCoralBlock(id, BlockBehaviour.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.CORAL_BLOCK));
+    }
+
+    protected static CommonRegistryObject<BaseCoralPlantBlock> registerVanillaCoralPlantBlock(String id, DyeColor color) {
+        return registerCoralPlantBlock(id, BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(SoundType.WET_GRASS));
+    }
+
+    protected static CommonRegistryObject<BaseCoralFanBlock> registerVanillaCoralFanBlock(String id, DyeColor color) {
+        return registerCoralFanBlock(id, BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(SoundType.WET_GRASS));
+    }
+
+    protected static CommonRegistryObject<BaseCoralWallFanBlock> registerVanillaCoralWallFanBlock(String id, DyeColor color) {
+        return registerCoralWallFanBlock(id, BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(SoundType.WET_GRASS));
+    }
+
+    protected static BlockBehaviour.Properties coralBlockProperties(MaterialColor color, SoundType soundType) {
+        return BlockBehaviour.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(soundType);
+    }
+
+    protected static BlockBehaviour.Properties coralPlantBlockProperties(MaterialColor color, SoundType soundType) {
+        return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(soundType);
+    }
+
+    protected static BlockBehaviour.Properties coralFanBlockProperties(MaterialColor color, SoundType soundType) {
+        return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(soundType);
+    }
+
+    protected static BlockBehaviour.Properties coralWallFanBlockProperties(MaterialColor color, SoundType soundType) {
+        return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(soundType);
+    }
+
+    protected static CommonRegistryObject<Block> registerCoralBlock(String id, BlockBehaviour.Properties properties) {
+        return registerBlock(id, () -> new Block(properties));
+    }
+
+    protected static CommonRegistryObject<BaseCoralPlantBlock> registerCoralPlantBlock(String id, BlockBehaviour.Properties properties) {
+        return registerBlock(id, () -> Services.PLATFORM_HELPER.createCoralPlantBlock(properties));
+    }
+
+    protected static CommonRegistryObject<BaseCoralFanBlock> registerCoralFanBlock(String id, BlockBehaviour.Properties properties) {
+        return registerBlock(id, () -> Services.PLATFORM_HELPER.createCoralFanBlock(properties));
+    }
+
+    protected static CommonRegistryObject<BaseCoralWallFanBlock> registerCoralWallFanBlock(String id, BlockBehaviour.Properties properties) {
+        return registerBlock(id, () -> Services.PLATFORM_HELPER.createCoralWallFanBlock(properties));
+    }
+
+    protected static <T extends Block> CommonRegistryObject<BlockItem> registerBlockItem(CommonRegistryObject<T> block) {
+        return registerItem(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    }
+
+    protected static <T extends Block> CommonRegistryObject<BlockItem> registerPlantItem(CommonRegistryObject<T> block) {
+        return registerItem(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    }
+
+    protected static <T extends Block, E extends Block> CommonRegistryObject<StandingAndWallBlockItem> registerFanItem(CommonRegistryObject<T> standingBlock, CommonRegistryObject<E> wallBlock) {
+        return registerItem(standingBlock.getId().getPath(), () -> new StandingAndWallBlockItem(standingBlock.get(), wallBlock.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    }
+
+    protected static <T extends Block> CommonRegistryObject<T> registerBlock(String id, Supplier<T> objectSupplier) {
+        return register(id, Registry.BLOCK_REGISTRY, objectSupplier);
+    }
+
+    protected static <T extends Item> CommonRegistryObject<T> registerItem(String id, Supplier<T> objectSupplier) {
+        return register(id, Registry.ITEM_REGISTRY, objectSupplier);
+    }
+
+    protected static <T, E extends T> CommonRegistryObject<E> register(String id, ResourceKey<? extends Registry<T>> registryKey, Supplier<E> objectSupplier) {
         return Services.PLATFORM_HELPER.register(id, cast(registryKey), objectSupplier);
-    }
-
-    private static <T extends Block> CommonRegistryObject<BlockItem> registerBlockItem(CommonRegistryObject<T> block) {
-        return register(block.getId().getPath(), Registry.ITEM_REGISTRY, () -> new BlockItem(block.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-    }
-
-    private static <T extends Block, E extends Block> CommonRegistryObject<StandingAndWallBlockItem> registerStandingWallBlockItem(CommonRegistryObject<T> standingBlock, CommonRegistryObject<E> wallBlock) {
-        return register(standingBlock.getId().getPath(), Registry.ITEM_REGISTRY, () -> new StandingAndWallBlockItem(standingBlock.get(), wallBlock.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     }
 
     static <T> T cast(Object o) {

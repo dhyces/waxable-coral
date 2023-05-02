@@ -20,6 +20,9 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             mods {
                 waxablecoral {
                     source sourceSets.main
@@ -32,7 +35,6 @@ minecraft {
             ideaModule "${rootProject.name}.${project.name}.main"
 
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -47,10 +49,13 @@ minecraft {
             ideaModule "${rootProject.name}.${project.name}.main"
 
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             args '--mod', 'waxablecoral', '--all', '--output', file("$rootDir/Common/src/generated/resources/"), '--existing', file("src/main/resources/")
+//            args '--mod', 'waxablecoral', '--all', '--output', file("src/generated/resources/"), '--existing', file("src/main/resources/")
 
             mods {
                 waxablecoral {
@@ -58,15 +63,49 @@ minecraft {
                 }
             }
         }
+
+        compatdata {
+            parent data
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            main "cpw.mods.bootstraplauncher.BootstrapLauncher"
+            source sourceSets.main
+            taskName "runCompatData"
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'waxablecoral', '--all', '--output', file("src/generated/resources/"), '--existing', file("src/main/resources/")
+
+            mods {
+                waxablecoral {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
     }
 }
 
+sourceSets.main.resources { srcDir "src/generated/resources" }
+
 repositories {
     mavenCentral()
+
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+
+    implementation fg.deobf("curse.maven:blueprint-382216:4442628")
+    implementation fg.deobf("curse.maven:upgradeaquatic-326895:4415517")
 
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     compileOnly project(":Common")

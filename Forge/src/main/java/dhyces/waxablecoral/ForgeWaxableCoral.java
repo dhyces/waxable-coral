@@ -2,6 +2,7 @@ package dhyces.waxablecoral;
 
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import dhyces.waxablecoral.integration.Compats;
+import dhyces.waxablecoral.integration.data.CompatLangProvider;
 import dhyces.waxablecoral.integration.ua.UpgradeAquaticCompat;
 import dhyces.waxablecoral.integration.data.CompatBlockLootProvider;
 import dhyces.waxablecoral.integration.data.CompatBlockStateProvider;
@@ -20,14 +21,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.*;
 
 @Mod(WaxableCoral.MODID)
@@ -73,19 +74,19 @@ public class ForgeWaxableCoral {
 
     private void datagen(final GatherDataEvent event) {
         if (event.getGenerator().getOutputFolder().toString().contains("Common")) {
-            event.getGenerator().addProvider(new ModBlockStateProvider(event.getGenerator(), WaxableCoral.MODID, event.getExistingFileHelper()));
-            event.getGenerator().addProvider(new ModLangProvider(event.getGenerator(), WaxableCoral.MODID, "en_us"));
-            event.getGenerator().addProvider(new ModBlockLootTableProvider(event.getGenerator()));
+            event.getGenerator().addProvider(event.includeClient(), new ModBlockStateProvider(event.getGenerator(), WaxableCoral.MODID, event.getExistingFileHelper()));
+            event.getGenerator().addProvider(event.includeClient(), new ModLangProvider(event.getGenerator(), WaxableCoral.MODID, "en_us"));
+            event.getGenerator().addProvider(event.includeServer(), new ModBlockLootTableProvider(event.getGenerator()));
         } else {
-            event.getGenerator().addProvider(new CompatBlockStateProvider(event.getGenerator(), WaxableCoral.MODID, event.getExistingFileHelper()));
-//            event.getGenerator().addProvider(new CompatLangProvider(event.getGenerator(), WaxableCoral.MODID, "en_us"));
-            event.getGenerator().addProvider(new CompatBlockLootProvider(event.getGenerator()));
+            event.getGenerator().addProvider(event.includeClient(), new CompatBlockStateProvider(event.getGenerator(), WaxableCoral.MODID, event.getExistingFileHelper()));
+            event.getGenerator().addProvider(event.includeClient(), new CompatLangProvider(event.getGenerator(), WaxableCoral.MODID, "en_us"));
+            event.getGenerator().addProvider(event.includeServer(), new CompatBlockLootProvider(event.getGenerator()));
         }
     }
 
     private void onBlockRightClick(final PlayerInteractEvent.RightClickBlock event) {
         BlockPos waxingPos = event.getHitVec().getBlockPos();
-        Level level = event.getWorld();
+        Level level = event.getLevel();
         BlockState state = level.getBlockState(waxingPos);
         ItemStack usedStack = event.getItemStack();
         if (usedStack.is(HONEYCOMBS) || usedStack.is(Items.HONEYCOMB)) {
@@ -94,15 +95,15 @@ public class ForgeWaxableCoral {
                 BlockState waxedState = waxed.withPropertiesOf(state);
                 level.setBlock(waxingPos, waxedState, Block.UPDATE_ALL_IMMEDIATE);
 
-                if (!event.getPlayer().getAbilities().instabuild) {
+                if (!event.getEntity().getAbilities().instabuild) {
                     usedStack.shrink(1);
                 }
-                event.getPlayer().awardStat(Stats.ITEM_USED.get(usedStack.getItem()));
-                if (event.getPlayer() instanceof ServerPlayer serverPlayer) {
+                event.getEntity().awardStat(Stats.ITEM_USED.get(usedStack.getItem()));
+                if (event.getEntity() instanceof ServerPlayer serverPlayer) {
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, waxingPos, usedStack);
                 }
                 level.gameEvent(event.getEntity(), GameEvent.BLOCK_CHANGE, waxingPos);
-                level.levelEvent(event.getPlayer(), 3003, waxingPos, 0);
+                level.levelEvent(event.getEntity(), 3003, waxingPos, 0);
                 event.setCancellationResult(InteractionResult.SUCCESS);
                 event.setCanceled(true);
             }
@@ -111,11 +112,11 @@ public class ForgeWaxableCoral {
 
     private void onAxeWaxOffUsed(final BlockEvent.BlockToolModificationEvent event) {
         if (event.getToolAction().equals(ToolActions.AXE_WAX_OFF)) {
-            BlockState state = event.getWorld().getBlockState(event.getContext().getClickedPos());
+            BlockState state = event.getLevel().getBlockState(event.getContext().getClickedPos());
             Block unwaxed = WaxableCoralAPI.getUnwaxed(state.getBlock());
             if (unwaxed != null) {
                 event.setFinalState(unwaxed.withPropertiesOf(state));
-                event.getWorld().scheduleTick(event.getPos(), unwaxed, 60 + event.getWorld().getRandom().nextInt(40));
+                event.getLevel().scheduleTick(event.getPos(), unwaxed, 60 + event.getLevel().getRandom().nextInt(40));
             }
         }
     }

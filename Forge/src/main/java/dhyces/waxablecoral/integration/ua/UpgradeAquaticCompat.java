@@ -1,6 +1,5 @@
 package dhyces.waxablecoral.integration.ua;
 
-import com.teamabnormals.upgrade_aquatic.common.block.ConduitSupportingBlock;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import dhyces.waxablecoral.Register;
 import dhyces.waxablecoral.WaxableCoralAPI;
@@ -25,7 +24,7 @@ public class UpgradeAquaticCompat extends Register {
     public static final CommonRegistryObject<Block> WAXED_PILLOW_CORAL_BLOCK = registerCoralBlock("waxed_pillow_coral_block", coralBlockProperties(MaterialColor.TERRACOTTA_WHITE, SoundType.CORAL_BLOCK));
     public static final CommonRegistryObject<Block> WAXED_SILK_CORAL_BLOCK = registerCoralBlock("waxed_silk_coral_block", coralBlockProperties(MaterialColor.COLOR_PURPLE, SoundType.CORAL_BLOCK));
     public static final CommonRegistryObject<Block> WAXED_CHROME_CORAL_BLOCK = registerCoralBlock("waxed_chrome_coral_block", coralBlockProperties(MaterialColor.TERRACOTTA_GRAY, SoundType.CORAL_BLOCK));
-    public static final CommonRegistryObject<Block> WAXED_PRISMARINE_CORAL_BLOCK = registerBlock("waxed_prismarine_coral_block", () -> new ConduitSupportingBlock(UABlocks.UAProperties.createPrismarineCoralBlock(false)));
+    public static final CommonRegistryObject<Block> WAXED_PRISMARINE_CORAL_BLOCK = registerBlock("waxed_prismarine_coral_block", () -> new ConduitCoralBlock(UABlocks.UAProperties.createPrismarineCoralBlock(false)));
     
     public static final CommonRegistryObject<BaseCoralPlantBlock> WAXED_ACAN_CORAL = registerCoralPlantBlock("waxed_acan_coral", coralPlantBlockProperties(MaterialColor.COLOR_CYAN, SoundType.WET_GRASS));
     public static final CommonRegistryObject<BaseCoralPlantBlock> WAXED_FINGER_CORAL = registerCoralPlantBlock("waxed_finger_coral", coralPlantBlockProperties(MaterialColor.TERRACOTTA_ORANGE, SoundType.WET_GRASS));

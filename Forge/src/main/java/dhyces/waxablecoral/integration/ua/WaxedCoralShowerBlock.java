@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -49,7 +50,7 @@ public class WaxedCoralShowerBlock extends BaseCoralPlantBlock {
     }
 
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRandom) {
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         double xOffset = pRandom.nextBoolean() ? -(Math.random() * 0.4) : Math.random() * 0.4;
         double yOffset = pRandom.nextBoolean() ? -(Math.random() * 0.4) : Math.random() * 0.4;
         double zOffset = pRandom.nextBoolean() ? -(Math.random() * 0.4) : Math.random() * 0.4;

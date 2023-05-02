@@ -5,7 +5,12 @@ import dhyces.waxablecoral.services.Services;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.function.Consumer;
+
 public class WaxableCoralAPI {
+    public static void addBehaviors(Consumer<BiMap<Block, Block>> consumer) {
+        consumer.accept(Services.PLATFORM_HELPER.getWaxMap());
+    }
 
     public static Block getWaxed(Block unwaxedBlock) {
         return Services.PLATFORM_HELPER.getWaxMap().get(unwaxedBlock);
