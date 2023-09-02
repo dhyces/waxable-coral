@@ -62,6 +62,19 @@ subprojects {
             name = 'BlameJared Maven (CrT / Bookshelf)'
             url = 'https://maven.blamejared.com'
         }
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/dhyces/trimmed")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+        maven { url = "https://jitpack.io/" }
+        maven {
+            url = "https://jm.gserv.me/repository/maven-public/"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {

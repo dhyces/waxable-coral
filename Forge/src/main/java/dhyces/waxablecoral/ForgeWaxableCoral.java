@@ -1,12 +1,8 @@
 package dhyces.waxablecoral;
 
-import dhyces.waxablecoral.data.ModBlockLootTableProvider;
-import dhyces.waxablecoral.data.ModBlockStateProvider;
-import dhyces.waxablecoral.data.ModLangProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -19,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -45,9 +40,6 @@ public class ForgeWaxableCoral {
 
         WaxableCoral.init();
 
-        if (!FMLLoader.isProduction()) {
-            modBus.addListener(this::datagen);
-        }
         if (FMLLoader.getDist().isClient()) {
             ForgeWaxableCoralClient.init(modBus);
         }
@@ -61,19 +53,12 @@ public class ForgeWaxableCoral {
         event.enqueueWork(WaxableCoralAPI::fillWaxingMap);
     }
 
-    private void datagen(final GatherDataEvent event) {
-        PackOutput output = event.getGenerator().getPackOutput();
-        event.getGenerator().addProvider(event.includeClient(), new ModBlockStateProvider(output, WaxableCoral.MODID, event.getExistingFileHelper()));
-        event.getGenerator().addProvider(event.includeClient(), new ModLangProvider(output, WaxableCoral.MODID, "en_us"));
-        event.getGenerator().addProvider(event.includeClient(), new ModBlockLootTableProvider(output));
-    }
-
     private void onBlockRightClick(final PlayerInteractEvent.RightClickBlock event) {
         BlockPos waxingPos = event.getHitVec().getBlockPos();
         BlockState state = event.getLevel().getBlockState(waxingPos);
         ItemStack usedStack = event.getItemStack();
         Level level = event.getLevel();
-        if (usedStack.is(HONEYCOMBS) || usedStack.is(Items.HONEYCOMB)) {
+        if (usedStack.is(HONEYCOMBS)) {
             Block waxed = WaxableCoralAPI.getWaxed(state.getBlock());
             if (waxed != null) {
                 BlockState waxedState = waxed.withPropertiesOf(state);
