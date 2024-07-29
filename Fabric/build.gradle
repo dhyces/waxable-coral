@@ -23,7 +23,7 @@ tasks.named("gatherFabricPlatformDetails", AbstractGatherPlatformDetailsTask).co
 }
 
 base {
-    archivesName = "${mod_id}-fabric-${libs.versions.minecraft.release.get()}-${mod_version}"
+    archivesName = "${mod_id}-fabric-${libs.versions.minecraft.release.get()}"
 }
 
 dependencies {

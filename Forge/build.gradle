@@ -22,7 +22,7 @@ tasks.named("gatherForgePlatformDetails", AbstractGatherPlatformDetailsTask).con
 }
 
 base {
-    archivesName = "${mod_id}-forge-${libs.versions.minecraft.release.get()}-${mod_version}"
+    archivesName = "${mod_id}-forge-${libs.versions.minecraft.release.get()}"
 }
 
 sourceSets {
