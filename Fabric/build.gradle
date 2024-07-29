@@ -1,42 +1,40 @@
+import org.groovymc.modsdotgroovy.gradle.tasks.AbstractGatherPlatformDetailsTask
+
 plugins {
-    id 'fabric-loom' version '1.1-SNAPSHOT'
-    id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
-    id 'maven-publish'
     id 'idea'
+    id 'maven-publish'
+    id 'fabric-loom' version '1.1-SNAPSHOT'
+    id "consumer.conventions"
+    alias(libs.plugins.mdg)
 }
 
-archivesBaseName = "${mod_id}-Fabric-${mc_version}-${mod_version}"
-
-repositories {
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
+modsDotGroovy {
+    platform(org.groovymc.modsdotgroovy.types.core.Platform.FABRIC)
+    inferGather.set(false)
+    multiplatform {
+        from(":Common")
     }
+    apply()
+}
+
+tasks.named("gatherFabricPlatformDetails", AbstractGatherPlatformDetailsTask).configure {
+    minecraftVersion = libs.versions.minecraft.release
+    platformVersion = libs.versions.fabric.loader
+}
+
+base {
+    archivesName = "${mod_id}-fabric-${libs.versions.minecraft.release.get()}-${mod_version}"
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${mc_version}"
+    minecraft "com.mojang:minecraft:${libs.versions.minecraft.release.get()}"
     mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    modImplementation(libs.fabric.loader)
+    modImplementation(libs.fabric.api)
 
     runtimeOnly("com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.9")
     modImplementation("mysticdrew:common-networking-fabric:1.0.1-1.20.1")
-    modImplementation("dev.dhyces.trimmed:trimmed-fabric-1.20.1:2.1.2")
-
-    implementation project(":Common")
-}
-
-sourceSets {
-    main {
-        resources {
-            srcDirs += [
-                    "$rootDir/Common/src/main/generated/resources"
-            ]
-        }
-    }
+    modImplementation("dev.dhyces.trimmed:trimmed-fabric-1.20.1:2.1.4")
 }
 
 loom {
@@ -53,55 +51,9 @@ loom {
             ideConfigGenerated(true)
             runDir("run")
         }
-        testData {
-            server()
-            setConfigName("Fabric TestData")
-            ideConfigGenerated(true)
-
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-
-            runDir "build/datagen"
-        }
     }
 
     mixin {
         defaultRefmapName = "${mod_id}.refmap.json"
-    }
-}
-
-processResources {
-    from project(":Common").sourceSets.main.resources
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand inputs.properties
-    }
-}
-
-idea {
-    module {
-        inheritOutputDirs = false
-    }
-}
-
-tasks.withType(JavaCompile) {
-    source(project(":Common").sourceSets.main.allSource)
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
     }
 }
