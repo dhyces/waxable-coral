@@ -19,6 +19,50 @@
     "waxablecoral:waxed_brain_coral_wall_fan",
     "waxablecoral:waxed_bubble_coral_wall_fan",
     "waxablecoral:waxed_fire_coral_wall_fan",
-    "waxablecoral:waxed_horn_coral_wall_fan"
+    "waxablecoral:waxed_horn_coral_wall_fan",
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_acan_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_finger_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_star_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_moss_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_petal_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_branch_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_rock_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_pillow_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_silk_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_chrome_coral_block"
+    },
+    {
+      "required": false,
+      "id": "waxablecoral:waxed_prismarine_coral_block"
+    }
   ]
 }

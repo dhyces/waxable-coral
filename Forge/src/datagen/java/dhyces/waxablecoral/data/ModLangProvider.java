@@ -1,5 +1,6 @@
 package dhyces.waxablecoral.data;
 
+import dhyces.waxablecoral.integration.upgradeaquatic.UpgradeAquaticCompat;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -36,5 +37,55 @@ public class ModLangProvider extends LanguageProvider {
         add(WAXED_BUBBLE_CORAL_WALL_FAN.get(), "Waxed Bubble Coral Fan");
         add(WAXED_FIRE_CORAL_WALL_FAN.get(), "Waxed Fire Coral Fan");
         add(WAXED_HORN_CORAL_WALL_FAN.get(), "Waxed Horn Coral Fan");
+
+        add(UpgradeAquaticCompat.WAXED_ACAN_CORAL_BLOCK.get(), "Waxed Acan Coral Block");
+        add(UpgradeAquaticCompat.WAXED_FINGER_CORAL_BLOCK.get(), "Waxed Finger Coral Block");
+        add(UpgradeAquaticCompat.WAXED_STAR_CORAL_BLOCK.get(), "Waxed Star Coral Block");
+        add(UpgradeAquaticCompat.WAXED_MOSS_CORAL_BLOCK.get(), "Waxed Moss Coral Block");
+        add(UpgradeAquaticCompat.WAXED_PETAL_CORAL_BLOCK.get(), "Waxed Petal Coral Block");
+        add(UpgradeAquaticCompat.WAXED_BRANCH_CORAL_BLOCK.get(), "Waxed Branch Coral Block");
+        add(UpgradeAquaticCompat.WAXED_ROCK_CORAL_BLOCK.get(), "Waxed Rock Coral Block");
+        add(UpgradeAquaticCompat.WAXED_PILLOW_CORAL_BLOCK.get(), "Waxed Pillow Coral Block");
+        add(UpgradeAquaticCompat.WAXED_SILK_CORAL_BLOCK.get(), "Waxed Silk Coral Block");
+        add(UpgradeAquaticCompat.WAXED_CHROME_CORAL_BLOCK.get(), "Waxed Chrome Coral Block");
+        add(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_BLOCK.get(), "Waxed Prismarine Coral Block");
+
+        add(UpgradeAquaticCompat.WAXED_ACAN_CORAL.get(), "Waxed Acan Coral");
+        add(UpgradeAquaticCompat.WAXED_FINGER_CORAL.get(), "Waxed Finger Coral");
+        add(UpgradeAquaticCompat.WAXED_STAR_CORAL.get(), "Waxed Star Coral");
+        add(UpgradeAquaticCompat.WAXED_MOSS_CORAL.get(), "Waxed Moss Coral");
+        add(UpgradeAquaticCompat.WAXED_PETAL_CORAL.get(), "Waxed Petal Coral");
+        add(UpgradeAquaticCompat.WAXED_BRANCH_CORAL.get(), "Waxed Branch Coral");
+        add(UpgradeAquaticCompat.WAXED_ROCK_CORAL.get(), "Waxed Rock Coral");
+        add(UpgradeAquaticCompat.WAXED_PILLOW_CORAL.get(), "Waxed Pillow Coral");
+        add(UpgradeAquaticCompat.WAXED_SILK_CORAL.get(), "Waxed Silk Coral");
+        add(UpgradeAquaticCompat.WAXED_CHROME_CORAL.get(), "Waxed Chrome Coral");
+        add(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL.get(), "Waxed Prismarine Coral");
+
+        add(UpgradeAquaticCompat.WAXED_ACAN_CORAL_FAN.get(), "Waxed Acan Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_FINGER_CORAL_FAN.get(), "Waxed Finger Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_STAR_CORAL_FAN.get(), "Waxed Star Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_MOSS_CORAL_FAN.get(), "Waxed Moss Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_PETAL_CORAL_FAN.get(), "Waxed Petal Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_BRANCH_CORAL_FAN.get(), "Waxed Branch Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_ROCK_CORAL_FAN.get(), "Waxed Rock Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_PILLOW_CORAL_FAN.get(), "Waxed Pillow Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_SILK_CORAL_FAN.get(), "Waxed Silk Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_CHROME_CORAL_FAN.get(), "Waxed Chrome Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_FAN.get(), "Waxed Prismarine Coral Fan");
+
+        add(UpgradeAquaticCompat.WAXED_ACAN_CORAL_WALL_FAN.get(), "Waxed Acan Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_FINGER_CORAL_WALL_FAN.get(), "Waxed Finger Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_STAR_CORAL_WALL_FAN.get(), "Waxed Star Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_MOSS_CORAL_WALL_FAN.get(), "Waxed Moss Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_PETAL_CORAL_WALL_FAN.get(), "Waxed Petal Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_BRANCH_CORAL_WALL_FAN.get(), "Waxed Branch Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_ROCK_CORAL_WALL_FAN.get(), "Waxed Rock Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_PILLOW_CORAL_WALL_FAN.get(), "Waxed Pillow Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_SILK_CORAL_WALL_FAN.get(), "Waxed Silk Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_CHROME_CORAL_WALL_FAN.get(), "Waxed Chrome Coral Fan");
+        add(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_WALL_FAN.get(), "Waxed Prismarine Coral Fan");
+
+        add(UpgradeAquaticCompat.WAXED_PRISMARINE_CORAL_SHOWER.get(), "Waxed Prismarine Coral Shower");
     }
 }
