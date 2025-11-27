@@ -15,8 +15,6 @@ java {
     withJavadocJar()
 }
 
-version = properties["mod_version"] as String
-
 tasks.jar {
     from(rootProject.file("LICENSE")) {
         rename { "${it}_${properties["mod_name"]}" }
@@ -40,11 +38,6 @@ tasks.jar {
 repositories {
     mavenCentral()
     mavenLocal()
-
-    maven {
-        name = "Sponge / Mixin"
-        url = uri("https://repo.spongepowered.org/repository/maven-public/")
-    }
 }
 
 dependencies {
@@ -64,21 +57,19 @@ sourcesJar {
     }
 }
 
-if (hasProperty("publisher")) {
-    publishing {
-        repositories {
-            maven {
-                name = "Local"
-                url  = findProperty("local_maven")
-            }
+publishing {
+    repositories {
+        maven {
+            name = "Local"
+            url  = findProperty("local_maven")
         }
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-                groupId project.group
-                artifactId project.base.archivesName.get()
-                version project.version
-            }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.base.archivesName.get()
+            version project.version
         }
     }
 }
