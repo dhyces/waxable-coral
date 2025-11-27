@@ -69,15 +69,15 @@ if (hasProperty("publisher")) {
         repositories {
             maven {
                 name = "Local"
-                url  = uri("file://" + findProperty("local_maven"))
+                url  = findProperty("local_maven")
             }
         }
         publications {
             mavenJava(MavenPublication) {
-                groupId project.group
-                artifactId project.archivesBaseName
-                version project.version
                 from components.java
+                groupId project.group
+                artifactId project.base.archivesName.get()
+                version project.version
             }
         }
     }

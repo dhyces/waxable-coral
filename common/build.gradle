@@ -1,26 +1,11 @@
 plugins {
+    id 'idea'
     id "shared.conventions"
-    alias(libs.plugins.mdg)
-    alias(libs.plugins.archloom)
+    alias(libs.plugins.moddev)
 }
 
 base {
     archivesName = "${mod_name}-common-${libs.versions.minecraft.release.get()}"
-}
-
-modsDotGroovy {
-    multiplatform {
-        gather {
-            projectProperty("mod_id")
-            projectProperty("mod_name")
-            projectProperty("authors")
-            projectProperty("at_enabled")
-            projectProperty("common_mixin_enabled")
-            projectProperty("fabric_mixin_enabled")
-            projectProperty("neoforge_mixin_enabled")
-        }
-        expose()
-    }
 }
 
 configurations {
@@ -35,42 +20,38 @@ configurations {
     testCompileOnly.extendsFrom(compileOnly)
 }
 
-loom {
-    if (Boolean.parseBoolean(at_enabled)) {
-        accessWidenerPath = file("src/main/resources/${mod_id}.accesswidener")
+neoForge {
+    neoFormVersion = libs.versions.neoform.get()
+    // Automatically enable AccessTransformers if the file exists
+    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
     }
+    parchment {
+        minecraftVersion = libs.versions.parchment.minecraft.get()
+        mappingsVersion = libs.versions.parchment.release.get()
+    }
+}
 
-    if (Boolean.parseBoolean(common_mixin_enabled)) {
-        mixin {
-            defaultRefmapName = "${mod_id}.refmap.json"
+// Vanilla depends on ASM 9.3, MDG makes that a 'strict' version constraint,
+// but mixin needs newer ASM so we override that here.
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == "org.ow2.asm") {
+            details.useVersion(libs.versions.asm.get())
+            details.because("Mixin requires new ASM")
         }
-    }
-
-    runs.configureEach {
-        ideConfigGenerated = false
     }
 }
 
 dependencies {
-    minecraft libs.minecraft
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.release.get()}@zip")
-    }
-
-    modCompileOnly libs.mixinextras.common
-    modCompileOnly libs.fabric.loader
+    compileOnly libs.mixin
+    compileOnly libs.mixinextras.common
 }
 
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     sourceSets.main.resources.sourceDirectories.forEach {
         commonResources it
-    }
-}
-
-idea {
-    module {
-        inheritOutputDirs = false
     }
 }

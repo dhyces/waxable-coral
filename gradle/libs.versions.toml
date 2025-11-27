@@ -1,26 +1,28 @@
 [versions]
-minecraft_release = "1.21"
-minecraft_range = "[1.21,1.22)"
-publish_range = "1.21"
+minecraft_release = "1.21.10"
+minecraft_range = "[1.21.10,1.21.11)"
+publish_range = "1.21.10"
 
-parchment_release = "2024.07.07"
-parchment_minecraft = "1.21"
+parchment_release = "2025.10.12"
+parchment_minecraft = "1.21.10"
 
 javafml_range = "[3,)"
-neoforge_release = "21.0.76-beta"
-neoforge_range = "[21.0.66-beta,22.0)"
+neoforge_release = "21.10.52-beta"
+neoforge_range = "[21.10.52-beta,21.11)"
 
-fabric_loader = "0.15.11"
-fabric_api_release = "0.100.6+1.21"
-fabric_api_range = "[0.100.0,)"
+fabric_loader = "0.18.1"
+fabric_api_release = "0.138.3+1.21.10"
+fabric_api_range = "[0.138.3,)"
 
-mixinextras = "0.3.6"
+neoform = "1.21.10-20251010.172816"
+mixin = "0.16.5+mixin.0.8.7"
+mixinextras = "0.5.0"
+asm = "9.7"
 
-jetbrains_annotations = "24.1.0"
+jetbrains_annotations = "26.0.2-1"
 
-mdg_release = "2.0.0-beta.30"
-regutils = "1.20.2-0.2.1"
-archloom = "1.7.405"
+moddev = "2.0.120"
+loom = "1.13.6"
 
 curseforgegradle = "1.1.18"
 minotaur = "2.+"
@@ -31,13 +33,13 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge_release"
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api_release" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 
+mixin = { module = "net.fabricmc:sponge-mixin", version.ref = "mixin" }
 mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
 
 jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations" }
 
 [plugins]
-mdg = { id = "org.groovymc.modsdotgroovy", version.ref = "mdg_release" }
-regutils = { id = "com.matyrobbrt.mc.registrationutils", version.ref = "regutils" }
-archloom = { id = "dev.architectury.loom", version.ref = "archloom" }
+moddev = { id = "net.neoforged.moddev", version.ref = "moddev" }
+loom = { id = "fabric-loom", version.ref = "loom" }
 curseforgegradle = { id = "net.darkhax.curseforgegradle", version.ref = "curseforgegradle" }
 minotaur = { id = "com.modrinth.minotaur", version.ref = "minotaur" }

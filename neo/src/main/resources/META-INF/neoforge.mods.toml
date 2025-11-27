@@ -1,0 +1,19 @@
+modLoader = "javafml"
+loaderVersion = "[3,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/dhyces/waxable-coral/issues"
+
+[[mods]]
+modId = "waxablecoral"
+displayName = "Waxable Coral"
+authors = "dhyces"
+version = "3.0.0"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/waxable-coral"
+sourcesUrl = "https://github.com/dhyces/waxable-coral"
+logoFile = "assets/waxablecoral/logo.png"
+description = "Wax your coral! Stays alive even when it's dry!"
+
+[[dependencies.waxablecoral]]
+modId = "neoforge"
+versionRange = "[21.10.52-beta,21.11)"
+type = "required"
