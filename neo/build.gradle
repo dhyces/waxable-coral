@@ -10,12 +10,36 @@ base {
     archivesName = "${mod_name}-neoforge-${libs.versions.minecraft.release.get()}"
 }
 
+sourceSets {
+    datagen {
+        compileClasspath += main.compileClasspath + main.output
+        runtimeClasspath += main.runtimeClasspath + main.output
+    }
+}
+
+configurations {
+    datagenCompile.extendsFrom compile
+    datagenCompileClasspath.extendsFrom compileClasspath
+}
+
 neoForge {
     version = libs.neoforge.get().version
 
     def atFile = project(":common").file("src/main/resources/META-INF/accessTransformer.cfg")
     if (atFile.exists()) {
-        accessTransformers.from((atFile))
+        accessTransformers.from(atFile)
+    }
+
+    parchment {
+        minecraftVersion = libs.versions.parchment.minecraft.get()
+        mappingsVersion = libs.versions.parchment.release.get()
+    }
+
+    mods {
+        create("waxablecoral") {
+            sourceSet(sourceSets.main)
+            sourceSet(sourceSets.datagen)
+        }
     }
 
     runs {
@@ -31,7 +55,10 @@ neoForge {
             clientData()
             ideName = "Neo Data"
 
-            programArgument("'--mod', ${mod_id}, '--all', '--output', ${rootProject.project(":common").file('src/generated/resources/')}, '--existing', ${file('src/main/resources/')}")
+            sourceSet = sourceSets.datagen
+            loadedMods = [mods.waxablecoral]
+
+            programArguments = ['--mod', mod_id, '--all', '--output', rootProject.project(":common").file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath]
         }
     }
 }
