@@ -7,34 +7,35 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Register {
     public static void init() {}
     
-    public static final Holder<Block> WAXED_TUBE_CORAL_BLOCK = registerBlock("waxed_tube_coral_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUBE_CORAL_BLOCK)));
-    public static final Holder<Block> WAXED_BRAIN_CORAL_BLOCK = registerBlock("waxed_brain_coral_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BRAIN_CORAL_BLOCK)));
-    public static final Holder<Block> WAXED_BUBBLE_CORAL_BLOCK = registerBlock("waxed_bubble_coral_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_CORAL_BLOCK)));
-    public static final Holder<Block> WAXED_FIRE_CORAL_BLOCK = registerBlock("waxed_fire_coral_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)));
-    public static final Holder<Block> WAXED_HORN_CORAL_BLOCK = registerBlock("waxed_horn_coral_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.HORN_CORAL_BLOCK)));
+    public static final Holder<Block> WAXED_TUBE_CORAL_BLOCK = registerBlock("waxed_tube_coral_block", Blocks.TUBE_CORAL_BLOCK, Block::new);
+    public static final Holder<Block> WAXED_BRAIN_CORAL_BLOCK = registerBlock("waxed_brain_coral_block", Blocks.BRAIN_CORAL_BLOCK, Block::new);
+    public static final Holder<Block> WAXED_BUBBLE_CORAL_BLOCK = registerBlock("waxed_bubble_coral_block", Blocks.BUBBLE_CORAL_BLOCK, Block::new);
+    public static final Holder<Block> WAXED_FIRE_CORAL_BLOCK = registerBlock("waxed_fire_coral_block", Blocks.FIRE_CORAL_BLOCK, Block::new);
+    public static final Holder<Block> WAXED_HORN_CORAL_BLOCK = registerBlock("waxed_horn_coral_block", Blocks.HORN_CORAL_BLOCK, Block::new);
     
-    public static final Holder<Block> WAXED_TUBE_CORAL = registerBlock("waxed_tube_coral", () -> Services.PLATFORM_HELPER.createCoralPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUBE_CORAL)));
-    public static final Holder<Block> WAXED_BRAIN_CORAL = registerBlock("waxed_brain_coral", () -> Services.PLATFORM_HELPER.createCoralPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRAIN_CORAL)));
-    public static final Holder<Block> WAXED_BUBBLE_CORAL = registerBlock("waxed_bubble_coral", () -> Services.PLATFORM_HELPER.createCoralPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_CORAL)));
-    public static final Holder<Block> WAXED_FIRE_CORAL = registerBlock("waxed_fire_coral", () -> Services.PLATFORM_HELPER.createCoralPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE_CORAL)));
-    public static final Holder<Block> WAXED_HORN_CORAL = registerBlock("waxed_horn_coral", () -> Services.PLATFORM_HELPER.createCoralPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HORN_CORAL)));
+    public static final Holder<Block> WAXED_TUBE_CORAL = registerBlock("waxed_tube_coral", Blocks.TUBE_CORAL, Services.PLATFORM_HELPER::createCoralPlantBlock);
+    public static final Holder<Block> WAXED_BRAIN_CORAL = registerBlock("waxed_brain_coral", Blocks.BRAIN_CORAL, Services.PLATFORM_HELPER::createCoralPlantBlock);
+    public static final Holder<Block> WAXED_BUBBLE_CORAL = registerBlock("waxed_bubble_coral", Blocks.BUBBLE_CORAL, Services.PLATFORM_HELPER::createCoralPlantBlock);
+    public static final Holder<Block> WAXED_FIRE_CORAL = registerBlock("waxed_fire_coral", Blocks.FIRE_CORAL, Services.PLATFORM_HELPER::createCoralPlantBlock);
+    public static final Holder<Block> WAXED_HORN_CORAL = registerBlock("waxed_horn_coral", Blocks.HORN_CORAL, Services.PLATFORM_HELPER::createCoralPlantBlock);
 
-    public static final Holder<Block> WAXED_TUBE_CORAL_FAN = registerBlock("waxed_tube_coral_fan", () -> Services.PLATFORM_HELPER.createCoralFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUBE_CORAL_FAN)));
-    public static final Holder<Block> WAXED_BRAIN_CORAL_FAN = registerBlock("waxed_brain_coral_fan", () -> Services.PLATFORM_HELPER.createCoralFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRAIN_CORAL_FAN)));
-    public static final Holder<Block> WAXED_BUBBLE_CORAL_FAN = registerBlock("waxed_bubble_coral_fan", () -> Services.PLATFORM_HELPER.createCoralFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_CORAL_FAN)));
-    public static final Holder<Block> WAXED_FIRE_CORAL_FAN = registerBlock("waxed_fire_coral_fan", () -> Services.PLATFORM_HELPER.createCoralFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE_CORAL_FAN)));
-    public static final Holder<Block> WAXED_HORN_CORAL_FAN = registerBlock("waxed_horn_coral_fan", () -> Services.PLATFORM_HELPER.createCoralFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HORN_CORAL_FAN)));
+    public static final Holder<Block> WAXED_TUBE_CORAL_FAN = registerBlock("waxed_tube_coral_fan", Blocks.TUBE_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
+    public static final Holder<Block> WAXED_BRAIN_CORAL_FAN = registerBlock("waxed_brain_coral_fan", Blocks.BRAIN_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
+    public static final Holder<Block> WAXED_BUBBLE_CORAL_FAN = registerBlock("waxed_bubble_coral_fan", Blocks.BUBBLE_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
+    public static final Holder<Block> WAXED_FIRE_CORAL_FAN = registerBlock("waxed_fire_coral_fan", Blocks.FIRE_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
+    public static final Holder<Block> WAXED_HORN_CORAL_FAN = registerBlock("waxed_horn_coral_fan", Blocks.HORN_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
     
-    public static final Holder<Block> WAXED_TUBE_CORAL_WALL_FAN = registerBlock("waxed_tube_coral_wall_fan", () -> Services.PLATFORM_HELPER.createCoralWallFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUBE_CORAL_WALL_FAN)));
-    public static final Holder<Block> WAXED_BRAIN_CORAL_WALL_FAN = registerBlock("waxed_brain_coral_wall_fan", () -> Services.PLATFORM_HELPER.createCoralWallFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRAIN_CORAL_WALL_FAN)));
-    public static final Holder<Block> WAXED_BUBBLE_CORAL_WALL_FAN = registerBlock("waxed_bubble_coral_wall_fan", () -> Services.PLATFORM_HELPER.createCoralWallFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_CORAL_WALL_FAN)));
-    public static final Holder<Block> WAXED_FIRE_CORAL_WALL_FAN = registerBlock("waxed_fire_coral_wall_fan", () -> Services.PLATFORM_HELPER.createCoralWallFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)));
-    public static final Holder<Block> WAXED_HORN_CORAL_WALL_FAN = registerBlock("waxed_horn_coral_wall_fan", () -> Services.PLATFORM_HELPER.createCoralWallFanBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Holder<Block> WAXED_TUBE_CORAL_WALL_FAN = registerBlock("waxed_tube_coral_wall_fan", Blocks.TUBE_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
+    public static final Holder<Block> WAXED_BRAIN_CORAL_WALL_FAN = registerBlock("waxed_brain_coral_wall_fan", Blocks.BRAIN_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
+    public static final Holder<Block> WAXED_BUBBLE_CORAL_WALL_FAN = registerBlock("waxed_bubble_coral_wall_fan", Blocks.BUBBLE_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
+    public static final Holder<Block> WAXED_FIRE_CORAL_WALL_FAN = registerBlock("waxed_fire_coral_wall_fan", Blocks.FIRE_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
+    public static final Holder<Block> WAXED_HORN_CORAL_WALL_FAN = registerBlock("waxed_horn_coral_wall_fan", Blocks.HORN_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
     
     public static final Holder<Item> WAXED_TUBE_CORAL_BLOCK_ITEM = registerBlockItem(WAXED_TUBE_CORAL_BLOCK);
     public static final Holder<Item> WAXED_BRAIN_CORAL_BLOCK_ITEM = registerBlockItem(WAXED_BRAIN_CORAL_BLOCK);
@@ -54,19 +55,21 @@ public class Register {
     public static final Holder<Item> WAXED_FIRE_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_FIRE_CORAL_FAN, WAXED_FIRE_CORAL_WALL_FAN);
     public static final Holder<Item> WAXED_HORN_CORAL_FAN_ITEM = registerStandingWallBlockItem(WAXED_HORN_CORAL_FAN, WAXED_HORN_CORAL_WALL_FAN);
 
-    private static Holder<Block> registerBlock(String id, Supplier<Block> objectSupplier) {
-        return Services.PLATFORM_HELPER.registerBlock(id, objectSupplier);
+    private static Holder<Block> registerBlock(String id, Block copyPropertiesOf, Function<Block.Properties, Block> blockFunction) {
+        return Services.PLATFORM_HELPER.registerBlock(id, copyPropertiesOf, blockFunction);
     }
 
-    private static Holder<Item> registerItem(String id, Supplier<Item> objectSupplier) {
-        return Services.PLATFORM_HELPER.registerItem(id, objectSupplier);
+    private static Holder<Item> registerItem(String id, Function<Item.Properties, Item> itemFunction) {
+        return Services.PLATFORM_HELPER.registerItem(id, itemFunction);
     }
 
     private static Holder<Item> registerBlockItem(Holder<Block> block) {
-        return registerItem(block.unwrapKey().orElseThrow().location().getPath(), () -> new BlockItem(block.value(), new Item.Properties()));
+        var id = block.unwrapKey().orElseThrow().location().getPath();
+        return registerItem(id, props -> new BlockItem(block.value(), props));
     }
 
     private static Holder<Item> registerStandingWallBlockItem(Holder<Block> standingBlock, Holder<Block> wallBlock) {
-        return registerItem(standingBlock.unwrapKey().orElseThrow().location().getPath(), () -> new StandingAndWallBlockItem(standingBlock.value(), wallBlock.value(), new Item.Properties(), Direction.DOWN));
+        var id = standingBlock.unwrapKey().orElseThrow().location().getPath();
+        return registerItem(id, props -> new StandingAndWallBlockItem(standingBlock.value(), wallBlock.value(), Direction.DOWN, props));
     }
 }

@@ -6,6 +6,7 @@ import dhyces.waxablecoral.services.helpers.PlatformHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.BaseCoralFanBlock;
@@ -14,17 +15,30 @@ import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class FabricPlatformHelper implements PlatformHelper {
+
     @Override
-    public Holder<Block> registerBlock(String id, Supplier<Block> blockSupplier) {
-        return Registry.registerForHolder(BuiltInRegistries.BLOCK, WaxableCoral.id(id), blockSupplier.get());
+    public Holder<Block> registerBlock(String id, Block copyPropertiesOf, Function<Block.Properties, Block> blockFunction) {
+        var key = WaxableCoral.key(Registries.BLOCK, id);
+        var properties = BlockBehaviour.Properties.ofFullCopy(copyPropertiesOf).setId(key);
+        return Registry.registerForHolder(BuiltInRegistries.BLOCK, key, blockFunction.apply(properties));
     }
 
     @Override
-    public Holder<Item> registerItem(String id, Supplier<Item> itemSupplier) {
-        return Registry.registerForHolder(BuiltInRegistries.ITEM, WaxableCoral.id(id), itemSupplier.get());
+    public Holder<Block> registerBlock(String id, Function<Block.Properties, Block> blockFunction) {
+        var key = WaxableCoral.key(Registries.BLOCK, id);
+        var properties = BlockBehaviour.Properties.of().setId(key);
+        return Registry.registerForHolder(BuiltInRegistries.BLOCK, key, blockFunction.apply(properties));
+    }
+
+    @Override
+    public Holder<Item> registerItem(String id, Function<Item.Properties, Item> itemFunction) {
+        var key = WaxableCoral.key(Registries.ITEM, id);
+        var properties = new Item.Properties().setId(key);
+        return Registry.registerForHolder(BuiltInRegistries.ITEM, key, itemFunction.apply(properties));
     }
 
     @Override
@@ -45,9 +59,5 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public BiMap<Block, Block> getWaxMap() {
         return HoneycombItem.WAXABLES.get();
-    }
-
-    private <T> T cast(Object o) {
-        return (T)o;
     }
 }

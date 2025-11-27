@@ -12,19 +12,25 @@ import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class NeoForgePlatformHelper implements PlatformHelper {
     private static final BiMap<Block, Block> WAXING_BIMAP = HashBiMap.create();
 
     @Override
-    public Holder<Block> registerBlock(String id, Supplier<Block> blockSupplier) {
-        return NeoForgeWaxableCoral.BLOCK_REGISTER.register(id, blockSupplier);
+    public Holder<Block> registerBlock(String id, Block copyPropertiesOf, Function<Block.Properties, Block> blockFunction) {
+        return NeoForgeWaxableCoral.BLOCK_REGISTER.registerBlock(id, blockFunction, () -> BlockBehaviour.Properties.ofFullCopy(copyPropertiesOf));
     }
 
     @Override
-    public Holder<Item> registerItem(String id, Supplier<Item> itemSupplier) {
-        return NeoForgeWaxableCoral.ITEM_REGISTER.register(id, itemSupplier);
+    public Holder<Block> registerBlock(String id, Function<Block.Properties, Block> blockFunction) {
+        return NeoForgeWaxableCoral.BLOCK_REGISTER.registerBlock(id, blockFunction);
+    }
+
+    @Override
+    public Holder<Item> registerItem(String id, Function<Item.Properties, Item> itemFunction) {
+        return NeoForgeWaxableCoral.ITEM_REGISTER.registerItem(id, itemFunction);
     }
 
     @Override
