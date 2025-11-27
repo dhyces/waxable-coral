@@ -65,11 +65,11 @@ public class Register {
 
     private static Holder<Item> registerBlockItem(Holder<Block> block) {
         var id = block.unwrapKey().orElseThrow().location().getPath();
-        return registerItem(id, props -> new BlockItem(block.value(), props));
+        return registerItem(id, props -> new BlockItem(block.value(), props.useBlockDescriptionPrefix()));
     }
 
     private static Holder<Item> registerStandingWallBlockItem(Holder<Block> standingBlock, Holder<Block> wallBlock) {
         var id = standingBlock.unwrapKey().orElseThrow().location().getPath();
-        return registerItem(id, props -> new StandingAndWallBlockItem(standingBlock.value(), wallBlock.value(), Direction.DOWN, props));
+        return registerItem(id, props -> new StandingAndWallBlockItem(standingBlock.value(), wallBlock.value(), Direction.DOWN, props.useBlockDescriptionPrefix()));
     }
 }
