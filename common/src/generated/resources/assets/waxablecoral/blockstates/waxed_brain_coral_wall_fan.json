@@ -1,32 +1,17 @@
 {
   "variants": {
-    "facing=east,waterlogged=false": {
+    "facing=east": {
       "model": "minecraft:block/brain_coral_wall_fan",
       "y": 90
     },
-    "facing=east,waterlogged=true": {
-      "model": "minecraft:block/brain_coral_wall_fan",
-      "y": 90
-    },
-    "facing=north,waterlogged=false": {
+    "facing=north": {
       "model": "minecraft:block/brain_coral_wall_fan"
     },
-    "facing=north,waterlogged=true": {
-      "model": "minecraft:block/brain_coral_wall_fan"
-    },
-    "facing=south,waterlogged=false": {
+    "facing=south": {
       "model": "minecraft:block/brain_coral_wall_fan",
       "y": 180
     },
-    "facing=south,waterlogged=true": {
-      "model": "minecraft:block/brain_coral_wall_fan",
-      "y": 180
-    },
-    "facing=west,waterlogged=false": {
-      "model": "minecraft:block/brain_coral_wall_fan",
-      "y": 270
-    },
-    "facing=west,waterlogged=true": {
+    "facing=west": {
       "model": "minecraft:block/brain_coral_wall_fan",
       "y": 270
     }
