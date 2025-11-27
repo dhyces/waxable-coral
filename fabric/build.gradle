@@ -17,10 +17,6 @@ loom {
         accessWidenerPath = awFile
     }
 
-    mixin {
-        defaultRefmapName = "${mod_id}.refmap.json"
-    }
-
     runs {
         configureEach {
             ideConfigGenerated(true)
