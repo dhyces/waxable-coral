@@ -5,10 +5,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class Register {
     public static void init() {}
@@ -31,11 +29,11 @@ public class Register {
     public static final Holder<Block> WAXED_FIRE_CORAL_FAN = registerBlock("waxed_fire_coral_fan", Blocks.FIRE_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
     public static final Holder<Block> WAXED_HORN_CORAL_FAN = registerBlock("waxed_horn_coral_fan", Blocks.HORN_CORAL_FAN, Services.PLATFORM_HELPER::createCoralFanBlock);
     
-    public static final Holder<Block> WAXED_TUBE_CORAL_WALL_FAN = registerBlock("waxed_tube_coral_wall_fan", Blocks.TUBE_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
-    public static final Holder<Block> WAXED_BRAIN_CORAL_WALL_FAN = registerBlock("waxed_brain_coral_wall_fan", Blocks.BRAIN_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
-    public static final Holder<Block> WAXED_BUBBLE_CORAL_WALL_FAN = registerBlock("waxed_bubble_coral_wall_fan", Blocks.BUBBLE_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
-    public static final Holder<Block> WAXED_FIRE_CORAL_WALL_FAN = registerBlock("waxed_fire_coral_wall_fan", Blocks.FIRE_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
-    public static final Holder<Block> WAXED_HORN_CORAL_WALL_FAN = registerBlock("waxed_horn_coral_wall_fan", Blocks.HORN_CORAL_WALL_FAN, Services.PLATFORM_HELPER::createCoralWallFanBlock);
+    public static final Holder<Block> WAXED_TUBE_CORAL_WALL_FAN = registerBlock("waxed_tube_coral_wall_fan", Blocks.TUBE_CORAL_WALL_FAN, props -> Services.PLATFORM_HELPER.createCoralWallFanBlock(props.overrideLootTable(Register.WAXED_TUBE_CORAL_FAN.value().getLootTable())));
+    public static final Holder<Block> WAXED_BRAIN_CORAL_WALL_FAN = registerBlock("waxed_brain_coral_wall_fan", Blocks.BRAIN_CORAL_WALL_FAN, props -> Services.PLATFORM_HELPER.createCoralWallFanBlock(props.overrideLootTable(Register.WAXED_BRAIN_CORAL_FAN.value().getLootTable())));
+    public static final Holder<Block> WAXED_BUBBLE_CORAL_WALL_FAN = registerBlock("waxed_bubble_coral_wall_fan", Blocks.BUBBLE_CORAL_WALL_FAN, props -> Services.PLATFORM_HELPER.createCoralWallFanBlock(props.overrideLootTable(Register.WAXED_BUBBLE_CORAL_FAN.value().getLootTable())));
+    public static final Holder<Block> WAXED_FIRE_CORAL_WALL_FAN = registerBlock("waxed_fire_coral_wall_fan", Blocks.FIRE_CORAL_WALL_FAN, props -> Services.PLATFORM_HELPER.createCoralWallFanBlock(props.overrideLootTable(Register.WAXED_FIRE_CORAL_FAN.value().getLootTable())));
+    public static final Holder<Block> WAXED_HORN_CORAL_WALL_FAN = registerBlock("waxed_horn_coral_wall_fan", Blocks.HORN_CORAL_WALL_FAN, props -> Services.PLATFORM_HELPER.createCoralWallFanBlock(props.overrideLootTable(Register.WAXED_HORN_CORAL_FAN.value().getLootTable())));
     
     public static final Holder<Item> WAXED_TUBE_CORAL_BLOCK_ITEM = registerBlockItem(WAXED_TUBE_CORAL_BLOCK);
     public static final Holder<Item> WAXED_BRAIN_CORAL_BLOCK_ITEM = registerBlockItem(WAXED_BRAIN_CORAL_BLOCK);
