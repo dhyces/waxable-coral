@@ -24,7 +24,7 @@ jetbrains_annotations = "26.0.2-1"
 moddev = "2.0.120"
 loom = "1.13.6"
 
-curseforgegradle = "1.1.18"
+curseforgegradle = "1.1.28"
 minotaur = "2.+"
 
 [libraries]

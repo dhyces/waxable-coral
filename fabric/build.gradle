@@ -65,16 +65,15 @@ tasks.register("curseforge", net.darkhax.curseforgegradle.TaskPublishCurseForge)
 
     disableVersionDetection()
     apiToken = findProperty("curseforge_publishing_token")
-    def projectId = properties["curseforge_project_id"]
-    def mainFile = upload(projectId, tasks.remapJar)
-    mainFile.displayName = "fabric-${libs.versions.minecraft.release.get()}-${properties["mod_version"]}"
-    mainFile.releaseType = properties["publish_type"]
+    def mainFile = upload(curseforge_project_id, tasks.remapJar)
+    mainFile.displayName = "fabric-${libs.versions.minecraft.release.get()}-${version}"
+    mainFile.releaseType = publish_type
     mainFile.changelog = rootProject.file("changelog.md").text
     mainFile.changelogType = "markdown"
     mainFile.addModLoader("Fabric")
     mainFile.addJavaVersion("Java ${java.toolchain.languageVersion.get()}")
     mainFile.addGameVersion(libs.versions.minecraft.release.get())
-    debugMode = properties["publish_debug"].toString().toBoolean()
+    debugMode = publish_debug.toBoolean()
 
     dependsOn(tasks.remapJar)
 }
