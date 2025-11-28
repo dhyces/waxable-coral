@@ -17,7 +17,7 @@ java {
 
 tasks.jar {
     from(rootProject.file("LICENSE")) {
-        rename { "${it}_${properties["mod_name"]}" }
+        rename { "${it}_${mod_name}" }
     }
     manifest {
         attributes([
