@@ -1,8 +1,8 @@
 package dhyces.waxablecoral;
 
 import dhyces.waxablecoral.data.ModBlockLoot;
-import dhyces.waxablecoral.data.ModModelProvider;
 import dhyces.waxablecoral.data.ModLangProvider;
+import dhyces.waxablecoral.data.ModModelProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
