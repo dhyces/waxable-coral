@@ -15,5 +15,5 @@ description = "Wax your coral! Stays alive even when it's dry!"
 
 [[dependencies.waxablecoral]]
 modId = "neoforge"
-versionRange = "[21.10.52-beta,21.11)"
+versionRange = "[21.11.0-beta,22.0)"
 type = "required"
