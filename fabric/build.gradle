@@ -33,6 +33,13 @@ loom {
     }
 }
 
+repositories {
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
+}
+
 dependencies {
     minecraft libs.minecraft
     mappings loom.layered() {
