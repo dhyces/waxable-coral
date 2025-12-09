@@ -4,7 +4,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
@@ -31,7 +31,7 @@ public class NeoForgeWaxableCoral {
     public static final DeferredRegister.Blocks BLOCK_REGISTER = DeferredRegister.createBlocks(WaxableCoral.MODID);
     public static final DeferredRegister.Items ITEM_REGISTER = DeferredRegister.createItems(WaxableCoral.MODID);
 
-    public static final TagKey<Item> WAXES_BLOCKS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "waxes_blocks"));
+    public static final TagKey<Item> WAXES_BLOCKS = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "waxes_blocks"));
 
     public NeoForgeWaxableCoral(IEventBus modBus) {
         BLOCK_REGISTER.register(modBus);

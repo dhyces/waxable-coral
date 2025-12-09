@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 public class FabricClientPlatformHelper implements ClientPlatformHelper {
     @Override
-    public void setRenderType(Holder<Block> block, ChunkSectionLayer renderType) {
+    public void setChunkSectionLayer(Holder<Block> block, ChunkSectionLayer renderType) {
         BlockRenderLayerMap.putBlock(block.value(), renderType);
     }
 }

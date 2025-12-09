@@ -8,7 +8,7 @@
 //import net.minecraft.core.HolderLookup;
 //import net.minecraft.core.registries.Registries;
 //import net.minecraft.data.PackOutput;
-//import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.resources.Identifier;
 //import net.minecraft.world.item.Item;
 //import net.minecraftforge.common.data.ExistingFileHelper;
 //
@@ -19,7 +19,7 @@
 //        super(packOutput, WaxableCoral.MODID, lookupProviderFuture, Registries.ITEM, existingFileHelper);
 //    }
 //
-//    ClientRegistryTagKey<Item> RENDER_WAX_ICON = ClientRegistryTagKey.of(Registries.ITEM, new ResourceLocation("waxedicons", "renders_waxed_icon"));
+//    ClientRegistryTagKey<Item> RENDER_WAX_ICON = ClientRegistryTagKey.of(Registries.ITEM, new Identifier("waxedicons", "renders_waxed_icon"));
 //
 //    @Override
 //    protected void addTags(HolderLookup.Provider provider) {
