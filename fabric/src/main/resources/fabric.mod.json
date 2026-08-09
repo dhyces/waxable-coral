@@ -17,9 +17,6 @@
   "entrypoints": {
     "main": [
       "dhyces.waxablecoral.FabricWaxableCoral"
-    ],
-    "client": [
-      "dhyces.waxablecoral.FabricWaxableCoralClient"
     ]
   },
   "depends": {
