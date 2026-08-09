@@ -82,6 +82,7 @@ tasks.register("curseforge", net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.addModLoader("Fabric")
     mainFile.addJavaVersion("Java ${java.toolchain.languageVersion.get()}")
     mainFile.addGameVersion(libs.versions.minecraft.release.get())
+    mainFile.addEnvironment("Server", "Client")
     debugMode = publish_debug.toBoolean()
 
     dependsOn(tasks.jar)
