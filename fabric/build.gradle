@@ -51,6 +51,8 @@ dependencies {
 }
 
 modrinth {
+    token = findProperty("modrinth_publishing_token").toString()
+
     projectId = modrinth_project_id
     versionName = "fabric-${libs.versions.minecraft.release.get()}-${version}"
     versionNumber = "${libs.versions.minecraft.release.get()}-${version}+fabric"
