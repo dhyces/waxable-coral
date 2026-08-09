@@ -82,5 +82,5 @@ tasks.register("curseforge", net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.addGameVersion(libs.versions.minecraft.release.get())
     debugMode = publish_debug.toBoolean()
 
-    dependsOn(tasks.remapJar)
+    dependsOn(tasks.jar)
 }
