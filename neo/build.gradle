@@ -30,13 +30,13 @@ neoForge {
         accessTransformers.from(atFile)
     }
 
-    parchment {
-        minecraftVersion = libs.versions.parchment.minecraft.get()
-        mappingsVersion = libs.versions.parchment.release.get()
-    }
+//    parchment {
+//        minecraftVersion = libs.versions.parchment.minecraft.get()
+//        mappingsVersion = libs.versions.parchment.release.get()
+//    }
 
     mods {
-        create("waxablecoral") {
+        create("${mod_id}") {
             sourceSet(sourceSets.main)
             sourceSet(sourceSets.datagen)
         }
@@ -56,7 +56,7 @@ neoForge {
             ideName = "Neo Data"
 
             sourceSet = sourceSets.datagen
-            loadedMods = [mods.waxablecoral]
+            loadedMods = [mods."${mod_id}"]
 
             programArguments = ['--mod', mod_id, '--all', '--output', rootProject.project(":common").file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath]
         }

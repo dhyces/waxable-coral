@@ -9,7 +9,7 @@ def versionCatalog = {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
     withSourcesJar()
     withJavadocJar()
@@ -17,7 +17,7 @@ java {
 
 tasks.jar {
     from(rootProject.file("LICENSE")) {
-        rename { "${it}_${mod_name}" }
+        rename { "${it}_${mod_id}" }
     }
     manifest {
         attributes([
@@ -42,18 +42,19 @@ repositories {
 
 dependencies {
     compileOnly(versionCatalog().findLibrary("jetbrains.annotations").get())
+    compileOnly(versionCatalog().findLibrary("jspecify").get())
 }
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
-    options.release = 21
+    options.release = 25
 }
 
 sourcesJar {
     from(rootProject.file("LICENSE")) {
-        rename { "${it}_${mod_name}" }
+        rename { "${it}_${mod_id}" }
     }
 }
 
@@ -71,5 +72,13 @@ publishing {
             artifactId project.base.archivesName.get()
             version project.version
         }
+    }
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }
